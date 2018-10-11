@@ -10,6 +10,9 @@ def ntimes(n) :
 	except ValueError:
 		print('\n\nYou must introduce an integer\n\n')
 		return;
+	if (n <= 0):
+		print('\n\nYou must introduce a positive integer\n\n')
+		return;
 	num = 1;
 	next_num = 1;
 	for x in range(0,n):
@@ -28,11 +31,36 @@ def ntimes(n) :
 		return;
 
 
+def upton(maxnum) :
+	try:
+		maxnum = int(maxnum);
+	except ValueError:
+		print('\n\nYou must introduce an integer\n\n')
+		return;
+	if (maxnum < 1):
+		print('\n\nYou must insert a value greater or equal to 1\n\n')
+	num = 1;
+	next_num = 1;
+	while (num<=maxnum) :
+		print(num)
+		temp = next_num;
+		next_num = next_num + num;
+		num = temp;
+	print('a    - Show more information')
+	print('else - Go to the main menu')
+	ntimeschoice = str(input('==> '));
+	if (ntimeschoice=='a'):
+		print('\n\nFeature in development\n\n')
+		return;
+	else:
+		print('')
+		return;
+
+
 
 
 
 print('\n\n** Fibonacci calculator **\n\n')
-
 repeat = 1;
 while (repeat==True) :
 	print('1 - Calculate n number of times')
@@ -42,7 +70,10 @@ while (repeat==True) :
 	choice = choice.upper();
 	if (choice=='1') :
 		n = str(input('Number of times: '));
-		loop = ntimes(n);
+		ntimes(n);
+	elif (choice=='2'):
+		maxnum = str(input('Calculate to the number: '))
+		upton(maxnum);
 	elif (choice=='T'):
 		print('\nGoodbye\n')
 		repeat = 0;
