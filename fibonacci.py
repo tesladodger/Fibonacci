@@ -1,5 +1,5 @@
 #Fibonacci
-#Calculates the sequence to the nth number or up to a certain number
+#Calculates the sequence to the nth iteration or up to a certain number
 #Future versions will save the solution to a file (and read existing files, maybe)
 #André Martins, 2018
 
@@ -20,7 +20,7 @@ def ntimes(n) :
 		temp = next_num;
 		next_num = next_num + num;
 		num = temp;
-	print('s    - Save to a file')
+	print('S    - Save to a file')
 	print('else - Go to the main menu')
 	ntimeschoice = str(input('==> '));
 	if (ntimeschoice=='s'):
@@ -41,23 +41,26 @@ def upton(maxnum) :
 		print('\n\nYou must insert a value greater or equal to 1\n\n')
 	num = 1;
 	next_num = 1;
+	itera = 0;
 	while (num<=maxnum) :
 		print(num)
 		temp = next_num;
 		next_num = next_num + num;
 		num = temp;
-	print('a    - Show more information')
+		itera += 1;
+	print('S    - Show more information')
 	print('else - Go to the main menu')
 	ntimeschoice = str(input('==> '));
-	if (ntimeschoice=='a'):
-		print('\n\nFeature in development\n\n')
+	if (ntimeschoice=='s'):
+		print("\n\nNumber of iterations:       ", itera)
+		print("Your number:                ", maxnum)
+		print("Next number in the sequence:", num)
+		print("Diference to that number:   ", (num - maxnum))
+		print("\n\n")
 		return;
 	else:
 		print('')
 		return;
-
-
-
 
 
 print('\n\n** Fibonacci calculator **\n\n')
