@@ -1,34 +1,38 @@
 #Fibonacci
 #Calculates the sequence to the nth iteration or up to a certain number
-#Future versions will save the solution to a file (and read existing files, maybe)
+#You can save the results to a '.txt' file
 #André Martins, 2018
 
+import os
 
 def ntimes(n) :
+	save_file = 0;
 	try:
 		n = int(n);
 	except ValueError:
 		print('\n\nYou must introduce an integer\n\n')
-		return;
+		return save_file;
 	if (n <= 0):
 		print('\n\nYou must introduce a positive integer\n\n')
-		return;
+		return save_file;
+	os.system('cls')
 	num = 1;
 	next_num = 1;
-	for x in range(0,n):
-		print(num)
+	print(num)
+	for x in range(0,n-1):
+		print(next_num)
 		temp = next_num;
 		next_num = next_num + num;
 		num = temp;
-	print('S    - Save to a file')
+	print('\nS    - Save to a file')
 	print('else - Go to the main menu')
 	ntimeschoice = str(input('==> '));
 	if (ntimeschoice=='s'):
-		print('\n\nFeature in development\n\n')
-		return;
+		save_file = 1;
+		return save_file;
 	else:
-		print('')
-		return;
+		os.system('cls')
+		return save_file;
 
 
 def upton(maxnum) :
@@ -39,23 +43,28 @@ def upton(maxnum) :
 		return;
 	if (maxnum < 1):
 		print('\n\nYou must insert a value greater or equal to 1\n\n')
+	os.system('cls')
 	num = 1;
 	next_num = 1;
 	itera = 0;
-	while (num<=maxnum) :
-		print(num)
+	print(num)
+	while (next_num<=maxnum) :
+		print(next_num)
 		temp = next_num;
 		next_num = next_num + num;
 		num = temp;
 		itera += 1;
-	print('S    - Show more information')
+	print('\nS    - Show more information')
 	print('else - Go to the main menu')
 	ntimeschoice = str(input('==> '));
 	if (ntimeschoice=='s'):
-		print("\n\nNumber of iterations:       ", itera)
+		os.system('cls')
+		if (num==maxnum):
+			print("The number ", maxnum, "is in the Fibonacci sequence")
+		print("Number of iterations:       ", itera)
 		print("Your number:                ", maxnum)
-		print("Next number in the sequence:", num)
-		print("Diference to that number:   ", (num - maxnum))
+		print("Next number in the sequence:", next_num)
+		print("Diference to that number:   ", (next_num - maxnum))
 		print("\n\n")
 		return;
 	else:
@@ -63,7 +72,29 @@ def upton(maxnum) :
 		return;
 
 
-print('\n\n** Fibonacci calculator **\n\n')
+def file_saver(n) :
+	file = open("fibonacci.txt","w");
+	conc = "Number of iterations: " + n + '\n';
+	file.write(conc)
+	num = 1;
+	next_num = 1;
+	n = int(n);
+	for x in range(0,n):
+		str_num = str(num) + '\n';
+		file.write(str_num)
+		temp = next_num;
+		next_num = next_num + num;
+		num = temp;
+	file.close()
+	return;
+
+
+
+os.system('cls')
+print(' ________________________')
+print('|                        |')
+print('** Fibonacci calculator **')
+print('|________________________|\n\n')
 repeat = 1;
 while (repeat==True) :
 	print('1 - Calculate n number of times')
@@ -73,10 +104,16 @@ while (repeat==True) :
 	choice = choice.upper();
 	if (choice=='1') :
 		n = str(input('Number of times: '));
-		ntimes(n);
+		save_file = ntimes(n);
+		if (save_file==True):
+			file_saver(n);
+			os.system('cls')
+			print('\nFile saved as: fibonacci.txt\n\n')
 	elif (choice=='2'):
 		maxnum = str(input('Calculate to the number: '))
 		upton(maxnum);
 	elif (choice=='T'):
 		print('\nGoodbye\n')
 		repeat = 0;
+	else:
+		print('\nInvalid option\n')
