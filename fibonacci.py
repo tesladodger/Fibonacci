@@ -11,7 +11,7 @@ def ntimes(n) :
 		n = int(n);
 	except ValueError :
 		print('\n\nYou must introduce an integer\n\n')
-		return save_file;
+		return save_file; #=False
 	if (n <= 0) :
 		print('\n\nYou must introduce a positive integer\n\n')
 		return save_file; #=False
@@ -92,6 +92,20 @@ def file_saver(n) :
 	return name;
 
 
+def message() :
+	import datetime
+	hour = datetime.datetime.now().hour;
+	if (hour>=20) :
+		greeting = 'night!';
+	elif (hour>=12) :
+		greeting = 'afternoon!';
+	elif (hour>=5) :
+		greeting = 'day!';
+	else :
+		greeting = 'night!';
+	return greeting;
+
+
 
 os.system('cls')
 print(' __________________________')
@@ -116,7 +130,10 @@ while (repeat==True) :
 		maxnum = str(input('Calculate to the number: '))
 		upton(maxnum);
 	elif (choice=='T') :
-		print('\nGoodbye\n')
+		import datetime
+		greeting = message();
+		print('\nThank you, have a good', greeting)
 		repeat = 0;
 	else :
+		os.system('cls')
 		print('\nInvalid option\n')
