@@ -1,6 +1,6 @@
 #Fibonacci
 #Calculates the sequence to the nth iteration or up to a certain number
-#You can save the results to a '.txt' file
+#You can save the results to a '.txt' file with the name you want
 #André Martins, 2018
 
 import os
@@ -14,14 +14,14 @@ def ntimes(n) :
 		return save_file;
 	if (n <= 0):
 		print('\n\nYou must introduce a positive integer\n\n')
-		return save_file;
+		return save_file; #=False
 	os.system('cls')
 	num = 1;
 	next_num = 1;
 	print(num)
-	for x in range(0,n-1):
-		print(next_num)
-		temp = next_num;
+	for x in range(0,n-1):         
+		print(next_num)            #By doing this we do one less calculation
+		temp = next_num;           #Is there a better way to do this without temp?
 		next_num = next_num + num;
 		num = temp;
 	print('\nS    - Save to a file')
@@ -29,10 +29,10 @@ def ntimes(n) :
 	ntimeschoice = str(input('==> '));
 	if (ntimeschoice=='s'):
 		save_file = 1;
-		return save_file;
+		return save_file; #=True
 	else:
 		os.system('cls')
-		return save_file;
+		return save_file; #=False
 
 
 def upton(maxnum) :
@@ -60,7 +60,7 @@ def upton(maxnum) :
 	if (ntimeschoice=='s'):
 		os.system('cls')
 		if (num==maxnum):
-			print("The number ", maxnum, "is in the Fibonacci sequence")
+			print("The number", maxnum, "is in the Fibonacci sequence")
 		print("Number of iterations:       ", itera)
 		print("Your number:                ", maxnum)
 		print("Next number in the sequence:", next_num)
@@ -73,12 +73,15 @@ def upton(maxnum) :
 
 
 def file_saver(n) :
-	file = open("fibonacci.txt","w");
+	name = str(input('Name of the file: '));
+	name = name.replace(" ","") #Remove whitespaces to avoid issues
+	name = name + '.txt';
+	file = open(name,"w");
 	conc = "Number of iterations: " + n + '\n';
 	file.write(conc)
 	num = 1;
 	next_num = 1;
-	n = int(n);
+	n = int(n); #No need to check, we already know it's an int
 	for x in range(0,n):
 		str_num = str(num) + '\n';
 		file.write(str_num)
@@ -86,15 +89,15 @@ def file_saver(n) :
 		next_num = next_num + num;
 		num = temp;
 	file.close()
-	return;
+	return name;
 
 
 
 os.system('cls')
-print(' ________________________')
-print('|                        |')
-print('** Fibonacci calculator **')
-print('|________________________|\n\n')
+print(' __________________________')
+print('|                          |')
+print('|** Fibonacci calculator **|')
+print('|__________________________|\n\n')
 repeat = 1;
 while (repeat==True) :
 	print('1 - Calculate n number of times')
@@ -106,9 +109,9 @@ while (repeat==True) :
 		n = str(input('Number of times: '));
 		save_file = ntimes(n);
 		if (save_file==True):
-			file_saver(n);
+			name = file_saver(n);
 			os.system('cls')
-			print('\nFile saved as: fibonacci.txt\n\n')
+			print('\nFile saved as:', name, '\n\n')
 	elif (choice=='2'):
 		maxnum = str(input('Calculate to the number: '))
 		upton(maxnum);
