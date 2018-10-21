@@ -3,9 +3,10 @@
 #You can save the results to a '.txt' file with the name you want
 #André Martins, 2018
 
+import sys
 import os
 
-def ntimes(n) :
+def ntimes(n, clear) :
 	save_file = 0;
 	try :
 		n = int(n);
@@ -15,13 +16,13 @@ def ntimes(n) :
 	if (n <= 0) :
 		print('\n\nYou must introduce a positive integer\n\n')
 		return save_file; #=False
-	os.system('cls')
+	os.system(clear)
 	num = 1;
 	next_num = 1;
 	print(num)
 	for x in range(0,n-1) :         
-		print(next_num)            #By doing this we do one less calculation
-		temp = next_num;           #Is there a better way to do this without temp?
+		print(next_num)   #By doing this we do one less calculation
+		temp = next_num;  #Is there a better way to do this without temp?
 		next_num = next_num + num;
 		num = temp;
 	print('\nS    - Save to a file')
@@ -31,11 +32,11 @@ def ntimes(n) :
 		save_file = 1;
 		return save_file; #=True
 	else :
-		os.system('cls')
+		os.system(clear)
 		return save_file; #=False
 
 
-def upton(maxnum) :
+def upton(maxnum, clear) :
 	try :
 		maxnum = int(maxnum);
 	except ValueError :
@@ -43,7 +44,7 @@ def upton(maxnum) :
 		return;
 	if (maxnum < 1) :
 		print('\n\nYou must insert a value greater or equal to 1\n\n')
-	os.system('cls')
+	os.system(clear)
 	num = 1;
 	next_num = 1;
 	itera = 0;
@@ -58,7 +59,7 @@ def upton(maxnum) :
 	print('else - Go to the main menu')
 	ntimeschoice = str(input('==> '));
 	if (ntimeschoice=='s') :
-		os.system('cls')
+		os.system(clear)
 		if (num==maxnum) :
 			print("The number", maxnum, "is in the Fibonacci sequence")
 		print("Number of iterations:       ", itera)
@@ -106,8 +107,13 @@ def message() :
 	return greeting;
 
 
-
-os.system('cls')
+plat = sys.platform
+if (plat == 'linux') :
+    clear = 'clear';
+elif (plat == 'win32') :
+    clear = 'cls';
+else : clear = 'clear';
+os.system(clear)
 print(' __________________________')
 print('|                          |')
 print('|** Fibonacci calculator **|')
@@ -121,19 +127,19 @@ while (repeat==True) :
 	choice = choice.upper();
 	if (choice=='1') :
 		n = str(input('Number of times: '));
-		save_file = ntimes(n);
+		save_file = ntimes(n,clear);
 		if (save_file==True) :
 			name = file_saver(n);
-			os.system('cls')
+			os.system(clear)
 			print('\nFile saved as:', name, '\n\n')
 	elif (choice=='2') :
 		maxnum = str(input('Calculate to the number: '))
-		upton(maxnum);
+		upton(maxnum, clear);
 	elif (choice=='T') :
 		import datetime
 		greeting = message();
 		print('\nThank you, have a good', greeting)
 		repeat = 0;
 	else :
-		os.system('cls')
+		os.system(clear)
 		print('\nInvalid option\n')
